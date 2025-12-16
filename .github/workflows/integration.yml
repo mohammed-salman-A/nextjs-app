@@ -1,0 +1,45 @@
+name: integration
+
+on:
+  push:
+    branches: ["main"]
+  pull-request:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+  strategy:
+    matrix:
+      node-version: [18.x, 20.x, 22.x]  
+  steps:
+    - uses: actions/checkouts@v4
+    - uses: action/setup-node@v3
+      with:
+        node-version: ${{matrix.node-version}}
+        cache: 'npm'
+    - name: "installing dependencies"
+      run: npm i
+    - name: "building command"
+      run: npm run build
+  
+  unit-tests:
+    runs-on: ubuntu-latest
+
+  strategy:
+    matrix:
+      node-version: [18.x, 20.x, 22.x]  
+  steps:
+    - uses: actions/checkouts@v4
+    - uses: action/setup-node@v3
+      with:
+        node-version: ${{matrix.node-version}}
+        cache: 'npm'
+    - name: "installing dependencies"
+      run: npm i
+    - name: "running test cases"
+      run: npm run test
+
+
+
