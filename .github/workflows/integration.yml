@@ -2,9 +2,9 @@ name: integration
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "master" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "master" ]
 
 jobs:
   build:
@@ -40,7 +40,7 @@ jobs:
         run: npm i
       - name: "running test cases"
         run: npm run test
-        
+
 
 
 
